@@ -1,0 +1,6 @@
+[
+    {"user_id": "user1@company.com", "timestamp": "2026-01-01T10:00:00", "success": false},
+    {"user_id": "user1@company.com", "timestamp": "2026-01-01T10:01:00", "success": false},
+    {"user_id": "user1@company.com", "timestamp": "2026-01-01T10:02:00", "success": false},
+    {"user_id": "user2@company.com", "timestamp": "2026-01-01T10:03:00", "success": true}
+]
