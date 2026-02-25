@@ -25,3 +25,9 @@ jobs:
 
       - name: Run Automation Script
         run: python src/main.py
+
+      - name: Upload Audit Log
+        uses: actions/upload-artifact@v4
+        with:
+          name: automation-audit-log
+          path: logs/        

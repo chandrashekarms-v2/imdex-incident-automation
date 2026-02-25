@@ -1,6 +1,102 @@
 [
-    {"user_id": "user1@company.com", "timestamp": "2026-01-01T10:00:00", "success": false},
-    {"user_id": "user1@company.com", "timestamp": "2026-01-01T10:01:00", "success": false},
-    {"user_id": "user1@company.com", "timestamp": "2026-01-01T10:02:00", "success": false},
-    {"user_id": "user2@company.com", "timestamp": "2026-01-01T10:03:00", "success": true}
+  {
+    "event_id": "evt-001",
+    "event_type": "login_attempt",
+    "user_id": "john.doe@company.com",
+    "role": "employee",
+    "ip_address": "10.1.1.10",
+    "location": "Australia",
+    "timestamp": "2026-01-01T09:00:00",
+    "success": false,
+    "failure_reason": "Invalid password"
+  },
+  {
+    "event_id": "evt-002",
+    "event_type": "login_attempt",
+    "user_id": "john.doe@company.com",
+    "role": "employee",
+    "ip_address": "10.1.1.10",
+    "location": "Australia",
+    "timestamp": "2026-01-01T09:01:00",
+    "success": false,
+    "failure_reason": "Invalid password"
+  },
+  {
+    "event_id": "evt-003",
+    "event_type": "login_attempt",
+    "user_id": "john.doe@company.com",
+    "role": "employee",
+    "ip_address": "10.1.1.10",
+    "location": "Australia",
+    "timestamp": "2026-01-01T09:02:00",
+    "success": false,
+    "failure_reason": "Invalid password"
+  },
+  {
+    "event_id": "evt-004",
+    "event_type": "login_attempt",
+    "user_id": "admin.user@company.com",
+    "role": "admin",
+    "ip_address": "192.168.10.5",
+    "location": "Australia",
+    "timestamp": "2026-01-01T09:05:00",
+    "success": false,
+    "failure_reason": "Invalid password"
+  },
+  {
+    "event_id": "evt-005",
+    "event_type": "mfa_challenge",
+    "user_id": "sarah.lee@company.com",
+    "role": "employee",
+    "ip_address": "172.16.0.4",
+    "location": "Australia",
+    "timestamp": "2026-01-01T09:10:00",
+    "success": true
+  },
+  {
+    "event_id": "evt-006",
+    "event_type": "mfa_challenge",
+    "user_id": "mike.chan@company.com",
+    "role": "employee",
+    "ip_address": "172.16.0.8",
+    "location": "Australia",
+    "timestamp": "2026-01-01T09:12:00",
+    "success": false,
+    "failure_reason": "MFA timeout"
+  },
+  {
+    "event_id": "evt-007",
+    "event_type": "login_attempt",
+    "user_id": "external.contractor@company.com",
+    "role": "contractor",
+    "ip_address": "203.0.113.25",
+    "location": "Unknown",
+    "timestamp": "2026-01-01T09:20:00",
+    "success": false,
+    "failure_reason": "Geo-location anomaly"
+  },
+  {
+    "event_id": "evt-008",
+    "event_type": "account_lock",
+    "user_id": "john.doe@company.com",
+    "role": "employee",
+    "timestamp": "2026-01-01T09:21:00"
+  },
+  {
+    "event_id": "evt-009",
+    "event_type": "password_reset_request",
+    "user_id": "emma.wilson@company.com",
+    "role": "employee",
+    "timestamp": "2026-01-01T09:25:00"
+  },
+  {
+    "event_id": "evt-010",
+    "event_type": "service_account_login",
+    "user_id": "svc-backup@company.com",
+    "role": "service",
+    "ip_address": "10.0.0.15",
+    "location": "DataCenter",
+    "timestamp": "2026-01-01T09:30:00",
+    "success": true
+  }
 ]
