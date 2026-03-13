@@ -60,11 +60,23 @@ jobs:
           USERNAME="${{ steps.extract_user.outputs.username }}"
           TEMP_PASSWORD="Poc-Test123@!*"
 
-          az ad user update \
-            --id "$USERNAME@mschandrashekar111gmail.onmicrosoft.com" \
-            --password "$TEMP_PASSWORD"
+          USER_UPN="$USERNAME@mschandrashekar111gmail.onmicrosoft.com"
 
-          echo "Password reset for $USERNAME"                      
+          echo "Resetting password for $USER_UPN"
+
+          USER_ID=$(az ad user show --id $USER_UPN --query id -o tsv)
+
+          az rest --method PATCH \
+            --url "https://graph.microsoft.com/v1.0/users/$USER_ID" \
+            --headers "Content-Type=application/json" \
+            --body "{
+              \"passwordProfile\": {
+                \"forceChangePasswordNextSignIn\": true,
+                \"password\": \"$TEMP_PASSWORD\"
+              }
+            }"
+
+          echo "Password reset for $USER_UPN"
 
       - name: Close Ticket
         uses: actions/github-script@v7
