@@ -25,11 +25,11 @@ jobs:
 
           BODY="${{ github.event.issue.body }}"
 
-          USERNAME=$(echo "$BODY" | grep -A1 "Username" | tail -n1 | tr -d '\r')
+          USERNAME=$(echo "$BODY" | awk '/### Username/{getline; getline; print $0}')
 
           echo "Extracted Username: $USERNAME"
 
-          echo "username=$USERNAME" >> $GITHUB_OUTPUT
+          echo "username=$USERNAME" >> $GITHUB_OUTPUT 
 
       - name: Print Username (Simulation Step)
         run: |
