@@ -82,6 +82,7 @@ jobs:
       - name: Send Email Notification
         run: |
           USER_UPN="shekach.ms@gmail.com"
+          az account get-access-token --resource-type ms-graph
           az rest --method POST \
             --url "https://graph.microsoft.com/v1.0/users/automation@mschandrashekar111gmail.onmicrosoft.com/sendMail" \
             --headers "Content-Type=application/json" \
