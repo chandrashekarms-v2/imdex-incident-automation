@@ -58,7 +58,7 @@ jobs:
       - name: Reset Password
         run: |
           USERNAME="${{ steps.extract_user.outputs.username }}"
-          TEMP_PASSWORD="Poc-Test123@!*"
+          TEMP_PASSWORD=$(openssl rand -base64 14 | tr -d '/+=' | cut -c1-14)
 
           USER_UPN="$USERNAME@mschandrashekar111gmail.onmicrosoft.com"
 
@@ -78,6 +78,29 @@ jobs:
 
           echo "Password reset for $USER_UPN"
 
+
+      - name: Send Email Notification
+        run: |
+          USER_UPN="shekach.ms@gmail.com"
+          az rest --method POST \
+            --url "https://graph.microsoft.com/v1.0/users/${USER_UPN}/sendMail" \
+            --headers "Content-Type=application/json" \
+            --body "{
+              \"message\": {
+                \"subject\": \"Password Reset Notification\",
+                \"body\": {
+                  \"contentType\": \"Text\",
+                  \"content\": \"Your password has been reset.\n\nTemporary Password: ${TEMP_PASSWORD}\n\nPlease login and change your password immediately.\"
+                },
+                \"toRecipients\": [
+                  {
+                    \"emailAddress\": {
+                      \"address\": \"${USER_UPN}\"
+                    }
+                  }
+                ]
+              }
+            }"
       - name: Close Ticket
         uses: actions/github-script@v7
         with:
