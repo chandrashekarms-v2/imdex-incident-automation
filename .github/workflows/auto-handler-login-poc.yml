@@ -1,0 +1,43 @@
+name: Auto handle for login - POC
+
+on:
+  issues:
+    types: [labeled]
+
+jobs:
+  reset-password:
+    if: github.event.label.name == 'approved'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+
+      - name: Extract Issue Details
+        run: |
+          echo "Issue number: ${{ github.event.issue.number }}"
+          echo "User request: ${{ github.event.issue.title }}"
+
+      - name: Run Automation Script
+        run: |
+          echo "Simulating password reset..."
+
+      - name: Update Ticket
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const issue_number = context.issue.number;
+
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: issue_number,
+              body: "✅ Password reset completed automatically."
+            });
+
+            await github.rest.issues.update({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: issue_number,
+              state: "closed"
+            });
