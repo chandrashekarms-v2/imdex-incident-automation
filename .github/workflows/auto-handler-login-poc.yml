@@ -61,7 +61,7 @@ jobs:
           TEMP_PASSWORD="Poc-Test123@!*"
 
           az ad user update \
-            --id "$USERNAME@yourtenant.onmicrosoft.com" \
+            --id "$USERNAME@mschandrashekar111gmail.onmicrosoft.com" \
             --password "$TEMP_PASSWORD"
 
           echo "Password reset for $USERNAME"                      
