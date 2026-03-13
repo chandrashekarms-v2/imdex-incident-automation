@@ -83,7 +83,7 @@ jobs:
         run: |
           USER_UPN="shekach.ms@gmail.com"
           az rest --method POST \
-            --url "https://graph.microsoft.com/v1.0/users/${USER_UPN}/sendMail" \
+            --url "https://graph.microsoft.com/v1.0/users/automation@mschandrashekar111gmail.onmicrosoft.com/sendMail" \
             --headers "Content-Type=application/json" \
             --body "{
               \"message\": {
