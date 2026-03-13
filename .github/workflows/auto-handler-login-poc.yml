@@ -17,16 +17,40 @@ jobs:
       - name: Checkout Repo
         uses: actions/checkout@v4
 
-      - name: Extract Issue Details
+      - name: Extract Username From Ticket
+        id: extract_user
         run: |
-          echo "Issue number: ${{ github.event.issue.number }}"
-          echo "User request: ${{ github.event.issue.title }}"
+          echo "Issue Body:"
+          echo "${{ github.event.issue.body }}"
 
-      - name: Run Automation Script
+          BODY="${{ github.event.issue.body }}"
+
+          USERNAME=$(echo "$BODY" | grep -A1 "Username" | tail -n1 | tr -d '\r')
+
+          echo "Extracted Username: $USERNAME"
+
+          echo "username=$USERNAME" >> $GITHUB_OUTPUT
+
+      - name: Print Username (Simulation Step)
         run: |
-          echo "Simulating password reset..."
+          USERNAME="${{ steps.extract_user.outputs.username }}"
+          echo "Automation will reset password for user: $USERNAME"
 
-      - name: Update Ticket
+      - name: Update Ticket Comment
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const issue_number = context.issue.number;
+            const username = "${{ steps.extract_user.outputs.username }}";
+
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: issue_number,
+              body: `🔄 Automation started for **${username}**.`
+            });            
+
+      - name: Close Ticket
         uses: actions/github-script@v7
         with:
           script: |
