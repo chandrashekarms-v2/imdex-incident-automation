@@ -1,5 +1,9 @@
 name: Auto handle for login - POC
 
+permissions:
+  issues: write
+  contents: read
+
 on:
   issues:
     types: [labeled]
