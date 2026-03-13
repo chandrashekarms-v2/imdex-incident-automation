@@ -1,0 +1,21 @@
+name: Account login issue
+description: Request login issue resolution
+title: "[Login issue]"
+labels: ["access_issue"]
+
+body:
+  - type: input
+    id: username
+    attributes:
+      label: Username
+      description: Enter your username
+      placeholder: testuser1
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Issue Description
+      description: Describe the issue
+      placeholder: My password is not working
