@@ -50,6 +50,22 @@ jobs:
               body: `🔄 Automation started for **${username}**.`
             });            
 
+      - name: Login to Azure
+        uses: azure/login@v2
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}            
+
+      - name: Reset Password
+        run: |
+          USERNAME="${{ steps.extract_user.outputs.username }}"
+          TEMP_PASSWORD="Poc-Test123@!*"
+
+          az ad user update \
+            --id "$USERNAME@yourtenant.onmicrosoft.com" \
+            --password "$TEMP_PASSWORD"
+
+          echo "Password reset for $USERNAME"                      
+
       - name: Close Ticket
         uses: actions/github-script@v7
         with:
@@ -69,3 +85,4 @@ jobs:
               issue_number: issue_number,
               state: "closed"
             });
+
