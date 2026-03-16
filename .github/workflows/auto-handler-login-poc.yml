@@ -76,32 +76,27 @@ jobs:
               }
             }"
 
+          echo "TEMP_PASSWORD=$TEMP_PASSWORD" >> $GITHUB_ENV
           echo "Password reset for $USER_UPN"
 
 
-      - name: Send Email Notification
-        run: |
-          USER_UPN="shekach.ms@gmail.com"
-          az account get-access-token --resource-type ms-graph
-          az rest --method POST \
-            --url "https://graph.microsoft.com/v1.0/users/automation@mschandrashekar111gmail.onmicrosoft.com/sendMail" \
-            --headers "Content-Type=application/json" \
-            --body "{
-              \"message\": {
-                \"subject\": \"Password Reset Notification\",
-                \"body\": {
-                  \"contentType\": \"Text\",
-                  \"content\": \"Your password has been reset.\n\nTemporary Password: ${TEMP_PASSWORD}\n\nPlease login and change your password immediately.\"
-                },
-                \"toRecipients\": [
-                  {
-                    \"emailAddress\": {
-                      \"address\": \"${USER_UPN}\"
-                    }
-                  }
-                ]
-              }
-            }"
+      - name: Send Password Email
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: ${{ secrets.SMTP_SERVER }}
+          server_port: ${{ secrets.SMTP_PORT }}
+          username: ${{ secrets.SMTP_USERNAME }}
+          password: ${{ secrets.SMTP_PASSWORD }}
+          subject: Password Reset Notification
+          to: shekach.ms@gmail.com
+          from: GitHub Automation <${{ secrets.SMTP_USERNAME }}>
+          body: |
+            Your password has been reset.
+
+            Temporary Password: ${{ env.TEMP_PASSWORD }}
+
+            Please login and change your password immediately.
+
       - name: Close Ticket
         uses: actions/github-script@v7
         with:
