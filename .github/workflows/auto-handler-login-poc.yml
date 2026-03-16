@@ -58,7 +58,7 @@ jobs:
       - name: Reset Password
         run: |
           USERNAME="${{ steps.extract_user.outputs.username }}"
-          TEMP_PASSWORD=$(openssl rand -base64 14 | tr -d '/+=' | cut -c1-14)
+          TEMP_PASSWORD="$(tr -dc 'A-Z' </dev/urandom | head -c1)$(tr -dc 'a-z' </dev/urandom | head -c5)$(tr -dc '0-9' </dev/urandom | head -c3)!@#$(tr -dc 'A-Za-z0-9' </dev/urandom | head -c3)"
 
           USER_UPN="$USERNAME@mschandrashekar111gmail.onmicrosoft.com"
 
