@@ -1,0 +1,35 @@
+name: Issue Created Notification
+
+on:
+  issues:
+    types: [opened]
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Send Issue Notification Email
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: ${{ secrets.SMTP_SERVER }}
+          server_port: ${{ secrets.SMTP_PORT }}
+          username: ${{ secrets.SMTP_USERNAME }}
+          password: ${{ secrets.SMTP_PASSWORD }}
+          subject: New Helpdesk Ticket Created
+          to: shekach.ms@gmail.com
+          from: GitHub Automation <${{ secrets.SMTP_USERNAME }}>
+          body: |
+            A new helpdesk ticket has been created.
+
+            Ticket Title:
+            ${{ github.event.issue.title }}
+
+            Ticket Description:
+            ${{ github.event.issue.body }}
+
+            Created By:
+            ${{ github.event.issue.user.login }}
+
+            Ticket Link:
+            ${{ github.event.issue.html_url }}
