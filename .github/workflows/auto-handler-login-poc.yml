@@ -60,7 +60,7 @@ jobs:
           USERNAME="${{ steps.extract_user.outputs.username }}"
           TEMP_PASSWORD="$(tr -dc 'A-Z' </dev/urandom | head -c1)$(tr -dc 'a-z' </dev/urandom | head -c5)$(tr -dc '0-9' </dev/urandom | head -c3)!@#$(tr -dc 'A-Za-z0-9' </dev/urandom | head -c3)"
 
-          USER_UPN="$USERNAME@mschandrashekar111gmail.onmicrosoft.com"
+          USER_UPN="$USERNAME@v2tech.onmicrosoft.com"
 
           echo "Resetting password for $USER_UPN"
 
