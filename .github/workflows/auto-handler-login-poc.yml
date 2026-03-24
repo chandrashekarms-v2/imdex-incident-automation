@@ -57,10 +57,16 @@ jobs:
 
       - name: Reset Password
         run: |
-          USERNAME="${{ steps.extract_user.outputs.username }}"
-          TEMP_PASSWORD="$(tr -dc 'A-Z' </dev/urandom | head -c1)$(tr -dc 'a-z' </dev/urandom | head -c5)$(tr -dc '0-9' </dev/urandom | head -c3)!@#$(tr -dc 'A-Za-z0-9' </dev/urandom | head -c3)"
+          INPUT_USERNAME="${{ steps.extract_user.outputs.username }}"
+          
+          # Check if username already contains domain
+          if [[ "$INPUT_USERNAME" == *"@"* ]]; then
+            USER_UPN="$INPUT_USERNAME"
+          else
+            USER_UPN="$INPUT_USERNAME@v2tech.onmicrosoft.com"
+          fi
 
-          USER_UPN="$USERNAME@v2tech.onmicrosoft.com"
+          TEMP_PASSWORD="$(tr -dc 'A-Z' </dev/urandom | head -c1)$(tr -dc 'a-z' </dev/urandom | head -c5)$(tr -dc '0-9' </dev/urandom | head -c3)!@#$(tr -dc 'A-Za-z0-9' </dev/urandom | head -c3)"
 
           echo "Resetting password for $USER_UPN"
 
