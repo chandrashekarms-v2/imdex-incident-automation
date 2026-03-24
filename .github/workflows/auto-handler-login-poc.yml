@@ -111,11 +111,11 @@ jobs:
           to: chandrashekar.ms@v2solutions.com
           from: GitHub Automation <${{ secrets.SMTP_USERNAME }}>
           html_body: |
-            <b>Your password has been reset.
+            <b>Your password has been reset.<br>
 
-            <b>Temporary Password: ${{ needs.agentic-identity-recovery-engine.outputs.temp_password }}
+            Temporary Password: ${{ needs.agentic-identity-recovery-engine.outputs.temp_password }}<br>
 
-            <b>Please login and change your password immediately.
+            <b>Please login and change your password immediately.<br>
 
       - name: Wait for 30 seconds
         run: sleep 30                        
