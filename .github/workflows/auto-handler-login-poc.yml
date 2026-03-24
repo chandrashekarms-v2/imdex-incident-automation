@@ -111,11 +111,43 @@ jobs:
           to: chandrashekar.ms@v2solutions.com
           from: GitHub Automation <${{ secrets.SMTP_USERNAME }}>
           html_body: |
-            <b>Your password has been reset.<br>
+            <h2>🔐 Password Reset Successful</h2>
 
-            Temporary Password: ${{ needs.agentic-identity-recovery-engine.outputs.temp_password }}<br>
+            <p>Your account credentials have been securely reset by the 
+            <b>Agentic Identity Recovery Engine</b>.</p>
 
-            <b>Please login and change your password immediately.<br>
+            <hr>
+
+            <h3>📄 Request Details</h3>
+            <b>Ticket ID:</b> ${{ needs.format_ticket.outputs.ticket_id }} <br>
+            <b>User:</b> ${{ needs.agentic-identity-recovery-engine.outputs.username }} <br>
+
+            <hr>
+
+            <h3>🔑 Temporary Access Credentials</h3>
+            <p>Your temporary password is:</p>
+
+            <p style="font-size:18px; font-weight:bold; color:#d9534f;">
+              ${{ needs.agentic-identity-recovery-engine.outputs.temp_password }}
+            </p>
+
+            <hr>
+
+            <h3>⚠️ Important Security Instructions</h3>
+            <ul>
+              <li>Please log in immediately using the temporary password</li>
+              <li>You will be prompted to set a new password</li>
+              <li>Do not share your credentials with anyone</li>
+            </ul>
+
+            <hr>
+
+            <p>
+              🤖 This action was completed automatically by the 
+              <b>AI-Orchestrated Identity Automation Platform</b>.
+            </p>
+
+            <p>V2 Tech Automation Platform</p>            
 
       - name: Wait for 30 seconds
         run: sleep 30                        
