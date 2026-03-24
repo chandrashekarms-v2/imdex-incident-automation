@@ -33,6 +33,8 @@ jobs:
   agentic-identity-recovery-engine:
     needs: request-intake-validation
     runs-on: ubuntu-latest
+    outputs:
+      temp_password: ${{ steps.reset_password.outputs.temp_password }}
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v4
@@ -62,6 +64,7 @@ jobs:
           creds: ${{ secrets.AZURE_CREDENTIALS }}            
 
       - name: Reset Password
+        id: reset_password
         run: |
           INPUT_USERNAME="${{ steps.extract_user.outputs.username }}"
           
@@ -88,7 +91,7 @@ jobs:
               }
             }"
 
-          echo "TEMP_PASSWORD=$TEMP_PASSWORD" >> $GITHUB_ENV
+          echo "temp_password=$TEMP_PASSWORD" >> $GITHUB_OUTPUT
           echo "Password reset for $USER_UPN"
       - name: Wait for 30 seconds
         run: sleep 30            
@@ -110,7 +113,7 @@ jobs:
           body: |
             Your password has been reset.
 
-            Temporary Password: ${{ env.TEMP_PASSWORD }}
+            Temporary Password: ${{ needs.agentic-identity-recovery-engine.outputs.temp_password }}
 
             Please login and change your password immediately.
       - name: Wait for 30 seconds
