@@ -27,10 +27,10 @@ jobs:
             <hr>
 
             <h3>🧾 Request Summary</h3>
-            <b>Title:</b>${{ github.event.issue.body }}<br>
+            <b>${{ github.event.issue.number }}<br>
 
             <h3>Created By:</h3>
-            <b>${{ github.event.issue.user.login }}</b> testing
+            <b>${{ github.event.issue.user.login }}</b>
 
             <h3>🔗 Access Ticket</h3>
             <a href="${{ github.event.issue.html_url }}">View Ticket</a>
