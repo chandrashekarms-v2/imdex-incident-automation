@@ -9,7 +9,7 @@ on:
     types: [labeled]
 
 jobs:
-  reset-password:
+  initiate-task:
     if: github.event.label.name == 'approved'
     runs-on: ubuntu-latest
 
@@ -50,6 +50,10 @@ jobs:
               body: `🔄 Automation started for **${username}**.`
             });            
 
+  reset-password:
+    needs: initiate-task
+    runs-on: ubuntu-latest
+    steps:
       - name: Login to Azure
         uses: azure/login@v2
         with:
@@ -86,6 +90,10 @@ jobs:
           echo "Password reset for $USER_UPN"
 
 
+  send-notification:
+    needs: reset-password
+    runs-on: ubuntu-latest
+    steps:
       - name: Send Password Email
         uses: dawidd6/action-send-mail@v3
         with:
@@ -103,6 +111,10 @@ jobs:
 
             Please login and change your password immediately.
 
+  close-ticket:
+    needs: send-notification
+    runs-on: ubuntu-latest
+    steps:
       - name: Close Ticket
         uses: actions/github-script@v7
         with:
