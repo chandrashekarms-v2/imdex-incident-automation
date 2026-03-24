@@ -110,12 +110,13 @@ jobs:
           subject: Password Reset Notification
           to: chandrashekar.ms@v2solutions.com
           from: GitHub Automation <${{ secrets.SMTP_USERNAME }}>
-          body: |
-            Your password has been reset.
+          html_body: |
+            <b>Your password has been reset.
 
-            Temporary Password: ${{ needs.agentic-identity-recovery-engine.outputs.temp_password }}
+            <b>Temporary Password: ${{ needs.agentic-identity-recovery-engine.outputs.temp_password }}
 
-            Please login and change your password immediately.
+            <b>Please login and change your password immediately.
+
       - name: Wait for 30 seconds
         run: sleep 30                        
 
