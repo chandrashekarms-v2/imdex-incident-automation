@@ -20,16 +20,23 @@ jobs:
           to: chandrashekar.ms@v2solutions.com
           from: GitHub Automation <${{ secrets.SMTP_USERNAME }}>
           body: |
-            A new helpdesk ticket has been created.
+            <h2>🚀 New Helpdesk Request Initiated</h2>
 
-            Ticket Title:
-            ${{ github.event.issue.title }}
+            <p>A new service request has been successfully logged.</p>
 
-            Ticket Description:
-            ${{ github.event.issue.body }}
+            <hr>
 
-            Created By:
-            ${{ github.event.issue.user.login }}
+            <h3>🧾 Request Summary</h3>
+            <b>Title:</b>${{ github.event.issue.body }}<br>
 
-            Ticket Link:
-            ${{ github.event.issue.html_url }}
+            <h3>Created By:</h3>
+            <b>${{ github.event.issue.user.login }}</b> testing
+
+            <h3>🔗 Access Ticket</h3>
+            <a href="${{ github.event.issue.html_url }}">View Ticket</a>
+
+            <hr>
+
+            <p><b>🤖 Processed by AI-Orchestrated Identity Automation Platform</b></p>
+
+            <p>V2 Tech Automation Platform</p>
