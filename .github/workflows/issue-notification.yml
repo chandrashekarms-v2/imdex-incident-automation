@@ -19,6 +19,7 @@ jobs:
           subject: New Helpdesk Ticket Created
           to: chandrashekar.ms@v2solutions.com
           from: GitHub Automation <${{ secrets.SMTP_USERNAME }}>
+          html_body: true
           body: |
             <h2>🚀 New Helpdesk Request Initiated</h2>
 
