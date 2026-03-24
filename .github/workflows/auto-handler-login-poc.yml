@@ -118,19 +118,9 @@ jobs:
 
             <hr>
 
-            <h3>📄 Request Details</h3>
-            <b>Ticket ID:</b> ${{ needs.format_ticket.outputs.ticket_id }} <br>
-            <b>User:</b> ${{ needs.agentic-identity-recovery-engine.outputs.username }} <br>
-
-            <hr>
-
             <h3>🔑 Temporary Access Credentials</h3>
             <p>Your temporary password is:</p>
-
-            <p style="font-size:18px; font-weight:bold; color:#d9534f;">
               ${{ needs.agentic-identity-recovery-engine.outputs.temp_password }}
-            </p>
-
             <hr>
 
             <h3>⚠️ Important Security Instructions</h3>
