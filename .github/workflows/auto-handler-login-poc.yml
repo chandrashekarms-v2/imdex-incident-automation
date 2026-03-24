@@ -30,7 +30,7 @@ jobs:
       - name: Wait for 30 seconds
         run: sleep 30            
 
-  Agentic Identity Recovery Engine:
+  agentic-identity-recovery-engine:
     needs: request-intake-validation
     runs-on: ubuntu-latest
     steps:
@@ -94,7 +94,7 @@ jobs:
         run: sleep 30            
 
   intelligent-notification-service:
-    needs: Agentic Identity Recovery Engine
+    needs: agentic-identity-recovery-engine
     runs-on: ubuntu-latest
     steps:
       - name: Send Password Email
@@ -116,7 +116,7 @@ jobs:
       - name: Wait for 30 seconds
         run: sleep 30                        
 
-  Service Request Closure Engine:
+  service-request-closure-engine:
     needs: intelligent-notification-service
     runs-on: ubuntu-latest
     steps:
