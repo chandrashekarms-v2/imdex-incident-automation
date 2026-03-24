@@ -17,7 +17,7 @@ jobs:
           username: ${{ secrets.SMTP_USERNAME }}
           password: ${{ secrets.SMTP_PASSWORD }}
           subject: New Helpdesk Ticket Created
-          to: shekach.ms@gmail.com
+          to: chandrashekar.ms@v2solutions.com
           from: GitHub Automation <${{ secrets.SMTP_USERNAME }}>
           body: |
             A new helpdesk ticket has been created.
